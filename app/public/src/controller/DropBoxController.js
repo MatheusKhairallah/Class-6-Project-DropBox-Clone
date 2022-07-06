@@ -14,8 +14,17 @@ class DropBoxController {
   }
 
   connectFirebase() {
-    // Coloque as informações do seu banco de dados aqui.
-    // firebase.initializeApp(firebaseConfig);
+    const firebaseConfig = {
+    apiKey: "AIzaSyCv9j-ssl1YNTri9EOAd8BGqcBGsB3sKVI",
+    authDomain: "dropbox-clone-ab5f3.firebaseapp.com",
+    databaseURL: "https://dropbox-clone-ab5f3-default-rtdb.firebaseio.com",
+    projectId: "dropbox-clone-ab5f3",
+    storageBucket: "dropbox-clone-ab5f3.appspot.com",
+    messagingSenderId: "1038019558652",
+    appId: "1:1038019558652:web:370a260ccf130c587beb79",
+    measurementId: "G-F7PZDNN5MK"
+  };
+    const app = initializeApp(firebaseConfig);
   }
 
   initEvents() {
