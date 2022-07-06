@@ -1,5 +1,7 @@
 class DropBoxController {
   constructor() {
+    this.onselectionchange = new Event('selectionchange');
+
     this.btnSendFileEl = document.querySelector("#btn-send-file");
     this.inputFilesEl = document.querySelector("#files");
     this.snackModalEl = document.querySelector("#react-snackbar-root");
@@ -15,19 +17,24 @@ class DropBoxController {
 
   connectFirebase() {
     const firebaseConfig = {
-    apiKey: "AIzaSyCv9j-ssl1YNTri9EOAd8BGqcBGsB3sKVI",
-    authDomain: "dropbox-clone-ab5f3.firebaseapp.com",
-    databaseURL: "https://dropbox-clone-ab5f3-default-rtdb.firebaseio.com",
-    projectId: "dropbox-clone-ab5f3",
-    storageBucket: "dropbox-clone-ab5f3.appspot.com",
-    messagingSenderId: "1038019558652",
-    appId: "1:1038019558652:web:370a260ccf130c587beb79",
-    measurementId: "G-F7PZDNN5MK"
-  };
+      apiKey: "AIzaSyCv9j-ssl1YNTri9EOAd8BGqcBGsB3sKVI",
+      authDomain: "dropbox-clone-ab5f3.firebaseapp.com",
+      databaseURL: "https://dropbox-clone-ab5f3-default-rtdb.firebaseio.com",
+      projectId: "dropbox-clone-ab5f3",
+      storageBucket: "dropbox-clone-ab5f3.appspot.com",
+      messagingSenderId: "1038019558652",
+      appId: "1:1038019558652:web:370a260ccf130c587beb79",
+      measurementId: "G-F7PZDNN5MK"
+    };
     const app = initializeApp(firebaseConfig);
   }
 
   initEvents() {
+
+    this.listFilesEl.addEventListener('selectionchange', e => {
+      console.log('selectionchange')
+    })
+
     this.btnSendFileEl.addEventListener("click", (event) => {
       this.inputFilesEl.click();
     });
@@ -333,6 +340,8 @@ class DropBoxController {
 
   initEventsLi(li) {
     li.addEventListener('click', e => {
+
+      this.listFilesEl.dispatchEvent(this.onselectionchange)
 
       if (e.shiftKey) {
         let firstLi = this.listFilesEl.querySelector('.selected');
